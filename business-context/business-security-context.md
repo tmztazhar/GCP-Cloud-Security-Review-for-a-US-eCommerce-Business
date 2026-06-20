@@ -54,3 +54,104 @@ ShopSmart uses a small GCP environment designed for a realistic portfolio lab. T
 | Billing governance | Budgets and alerts |
 
 This project does not require a full production eCommerce platform. It uses a controlled lab environment to simulate realistic cloud security review activities.
+
+## 5. Sensitive Information Handled
+ShopSmart may handle or process the following types of information:
+
+| Information Type | Example | Security Concern |
+| --- | --- | --- |
+| Customer information | Name, email, phone number, shipping address | Privacy, phishing, customer trust impact |
+| Order information | Order ID, product details, delivery status | Business confidentiality, customer service impact |
+| Payment-related information | Payment provider reference, transaction status | Fraud risk, financial process risk |
+| Product data | Product catalogue, images, descriptions | Integrity and availability |
+| Business data | Sales reports, operational files | Commercial confidentiality |
+| Application secrets | API keys, database credentials, tokens | High risk if exposed |
+| Logs | Access logs, admin activity, audit records | Sensitive operational and security information |
+| Admin accounts | IAM users and service accounts | Privileged access risk |
+
+This project does not use real customer data, real payment card data, real credentials, or real production systems.
+
+## 6. Key Cloud Security Concerns
+The main cloud security concerns for ShopSmart are:
+
+| Risk Area | Example Scenario |
+| --- | --- |
+| Overprivileged IAM roles | Users or service accounts have broader permissions than required. |
+| Weak account security | MFA is not consistently used for administrative accounts. |
+| Public Cloud Storage exposure | A storage bucket is accidentally made public. |
+| Poor service account management | Unused or overprivileged service accounts remain active. |
+| Inadequate logging | Important admin or data access activity is not logged or reviewed. |
+| Weak network controls | Firewall rules allow unnecessary public access. |
+| Secret exposure | API keys or credentials are stored insecurely. |
+| Contractor access risk | External developer access is not time-limited or reviewed. |
+| Poor environment separation | Development and production-like resources are not clearly separated. |
+| Lack of governance | No clear ownership, review cycle, or cloud security baseline. |
+
+## 7. Applicable Frameworks and References
+This project uses practical cloud security and governance concepts aligned to:
+
+| Framework / Reference | How It Is Used |
+| --- | --- |
+| Google Cloud security best practices | Used to review IAM, logging, service accounts, storage, and cloud configuration. |
+| CIS Google Cloud Platform Foundations Benchmark | Used as a reference point for cloud configuration review areas. |
+| NIST Cybersecurity Framework | Used conceptually for identify, protect, detect, respond, and recover thinking. |
+| ISO/IEC 27001-style control thinking | Used for governance, access control, logging, supplier access, and risk treatment. |
+| Least privilege principle | Used to assess IAM roles and service account permissions. |
+| Shared responsibility model | Used to distinguish responsibilities between Google Cloud and the customer. |
+
+This is not a formal compliance audit. It is a portfolio security review based on practical cloud security assessment methods.
+
+## 8. Project Scope
+This project includes a security review of the following areas:
+
+| In Scope |
+| --- |
+| GCP project structure |
+| IAM users and roles |
+| Privileged access |
+| MFA and account security observations |
+| Service accounts |
+| Cloud Storage bucket permissions |
+| Cloud Logging and Cloud Audit Logs |
+| Security Command Center Standard observations |
+| VPC firewall rules |
+| Secret Manager usage |
+| Cloud Run or App Engine application exposure |
+| Billing alerts and basic governance |
+| Cloud security risk register |
+| Security recommendations |
+| Executive cloud security summary |
+| Architecture diagram |
+| Screenshots from the GCP lab environment |
+
+## 9. Out of Scope
+The following items are outside the scope of this portfolio project:
+
+| Out of Scope | Reason |
+| --- | --- |
+| Real production customer data | This is a fictional portfolio lab. |
+| Payment card processing review | No real payment card data is used. |
+| PCI DSS audit | This project is not a formal PCI assessment. |
+| Penetration testing | The focus is cloud security review and governance. |
+| Red team activity | Not required for this project. |
+| Enterprise SIEM deployment | Not realistic for this SME lab scenario. |
+| GKE cluster security | Avoided to reduce cost and complexity. |
+| Large Cloud SQL deployment | Not required for the core project. |
+| Paid Security Command Center Premium features | Standard/free visibility is sufficient for this portfolio project. |
+| Full legal or compliance advice | This project is educational and portfolio-based. |
+
+## 10. GCP Lab Environment Assumptions
+This project assumes:
+
+| Assumption |
+| --- |
+| A dedicated GCP project is created only for this portfolio lab. |
+| No real customer information is uploaded. |
+| No real payment card data is processed. |
+| Dummy sample data is used where data is needed. |
+| The lab is created with cost control in mind. |
+| Billing alerts are configured to reduce unexpected charges. |
+| Expensive resources such as GKE, GPUs, and large databases are avoided. |
+| Screenshots are taken from the user’s own GCP console. |
+| Resources are deleted after screenshots and review activities are completed. |
+| The project demonstrates cloud security review skills, not production deployment. |
