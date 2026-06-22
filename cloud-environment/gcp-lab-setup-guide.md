@@ -43,3 +43,20 @@ The following rules must be followed throughout the project:
 | Remove resources after use | Delete unused resources after screenshots and review are completed. |
 | Protect credentials | Do not publish real account emails, project IDs, keys, tokens, or secrets. |
 | Sanitize screenshots | Blur personal email addresses, billing details, project IDs, and sensitive identifiers before publishing. |
+
+## 4. Lab Build Overview
+
+The lab should be created in the following order:
+1. Create dedicated GCP project
+2. Configure billing budget and alerts
+3. Enable required APIs
+4. Create basic IAM review scenario
+5. Create service accounts
+6. Create Cloud Storage buckets
+7. Add Secret Manager test secret
+8. Enable or review Cloud Logging and Audit Logs
+9. Review Security Command Center Standard
+10. Create optional Cloud Run demo app
+11. Capture screenshots
+12. Complete security review documentation
+13. Delete unnecessary resources
