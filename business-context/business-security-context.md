@@ -155,3 +155,78 @@ This project assumes:
 | Screenshots are taken from the user’s own GCP console. |
 | Resources are deleted after screenshots and review activities are completed. |
 | The project demonstrates cloud security review skills, not production deployment. |
+
+## 11. Suggested Demo Architecture
+
+The lab environment may use this simple architecture:
+
+`Internet User` --> `Cloud Run / App Engine Demo Web App` = Cloud Storage Bucket + Secret Manager + Cloud Logging / Audit Logs + IAM Users and Service Accounts
+
+## 12. Main Review Questions
+This cloud security review will answer the following questions:
+1. Are IAM roles assigned using least privilege?
+2. Are any users or service accounts overprivileged?
+3. Are service accounts managed securely?
+4. Are unused accounts or excessive permissions present?
+5. Are Cloud Storage buckets publicly exposed?
+6. Are audit logs enabled and useful for investigation?
+7. Are administrative actions visible in Cloud Logging?
+8. Are firewall rules too broad?
+9. Are secrets stored securely?
+10. Are external contractors given appropriate access?
+11. Are billing alerts and basic governance controls configured?
+12. What are the highest-priority security improvements?
+13. How should risks be communicated to business leadership?
+
+## 13. Expected Deliverables
+The completed project will include:
+
+| Deliverable | Purpose |
+| --- | --- |
+| Business Security Context | Defines the business scenario, scope, assumptions, and review purpose. |
+| GCP Lab Setup Guide | Explains how the demo environment was created safely. |
+| Cloud Architecture Diagram | Shows the demo GCP environment and security review scope. |
+| GCP Security Review Checklist | Documents the review areas and findings. |
+| IAM and Access Review | Reviews users, roles, service accounts, and privileged access. |
+| Logging and Monitoring Review | Reviews Cloud Logging, audit logs, alerts, and visibility. |
+| Cloud Risk Register | Records risks, likelihood, impact, existing controls, and treatment actions. |
+| Security Recommendations Report | Provides prioritised technical and business recommendations. |
+| Executive Cloud Security Summary | Summarises key findings for business leadership. |
+
+## 14. Security Review Method
+The review will follow this practical process:
+1. Define business scenario and scope
+2. Create safe GCP demo project
+3. Configure basic lab resources
+4. Review IAM and access controls
+5. Review service accounts
+6. Review storage permissions
+7. Review logging and audit visibility
+8. Review firewall and exposure settings
+9. Review secrets handling
+10. Record findings
+11. Score risks
+12. Write recommendations
+13. Produce executive summary
+
+## 15. Learning Objectives
+This project demonstrates the ability to:
+
+| Skill Demonstrated | Evidence |
+| --- | --- |
+| Cloud security review | GCP security checklist and findings. |
+| IAM analysis | IAM and access review documentation. |
+| Service account review | Service account risk assessment. |
+| Storage security | Cloud Storage bucket permission review. |
+| Logging review | Cloud Logging and audit log assessment. |
+| Risk assessment | Cloud risk register and treatment plan. |
+| GRC communication | Executive summary and security recommendations. |
+| Business understanding | eCommerce-focused risk framing. |
+| Cloud governance | Ownership, review process, access control, and improvement roadmap. |
+
+## 16. Portfolio Note
+This project is a fictional cloud security portfolio project. ShopSmart Online LLC is not a real company.
+
+The GCP environment used for this project is a demo lab environment created for learning and portfolio purposes only. It must not contain real customer data, real payment data, real credentials, or production workloads.
+
+This project is not a legal assessment, compliance audit, penetration test, or full production security review.
