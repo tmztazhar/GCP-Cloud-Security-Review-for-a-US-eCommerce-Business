@@ -82,3 +82,16 @@ The environment is intentionally simple because the goal is to assess cloud secu
 | VPC Firewall Rules | Review network exposure. | Broad access, unnecessary rules, public exposure. |
 | Cloud Run | Optional demo web application. | Public access, service identity, logs, configuration review. |
 | Biling | Cost governance. | Budget alerts and cost control. |
+
+## 7. Cloud Services Out of Scope
+| GCP Service / Area | Reason |
+| --- | --- |
+| GKE | Avoided due to cost and complexity for this SME portfolio lab. |
+| Large Compute Engine deployment | Not required for the review objective. |
+| Large Cloud SQL deployment | Optional only; not required for the core project. |
+| BigQuery heavy workloads | Avoided to prevent unnecessary cost. |
+| Payment processing systems | No real payment or PCI review is included. |
+| Production CI/CD pipelines | Not required for this project. |
+| Enterprise SIEM integration | Not realistic for this SME scenario. |
+| Paid Security Command Center tiers | Free or standard visibility is sufficient for this project. |
+| Penetration testing | The project focuses on security review and governance. |
