@@ -446,3 +446,26 @@ Cleanup checklist:
 Important:
 
 If the project is no longer needed, shutting down the entire GCP project is the safest way to stop future charges.
+
+## 5. Minimum Lab Resources
+The minimum lab environment should include:
+
+| Resource | Required? |
+| --- | --- |
+| Dedicated GCP project | Yes |
+| Billing budget and alerts | Yes |
+| IAM review | Yes |
+| Service accounts | Yes |
+| Cloud Storage bucket | Yes |
+| Secret Manager dummy secret | Recommended |
+| Cloud Logging review | Yes |
+| Audit Logs review | Yes |
+| Security Command Center Standard review | Recommended |
+| VPC firewall review | Yes |
+| Cloud Run demo app | Optional |
+| Cloud SQL | Optional, avoid unless needed |
+
+## 6. Portfolio Note
+This lab setup guide is part of a fictional cloud security portfolio project. It demonstrates safe lab planning, GCP environment setup, cost control, security review preparation, and cloud governance thinking for a US eCommerce business scenario.
+
+This guide does not represent a production deployment guide, formal compliance audit, penetration testing plan, or legal assessment.
