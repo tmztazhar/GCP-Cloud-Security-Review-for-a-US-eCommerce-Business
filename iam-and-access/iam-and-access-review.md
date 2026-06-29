@@ -67,3 +67,36 @@ The review uses the following IAM principles:
 | No unnecessary keys | Service account keys should be avoided unless clearly required. |
 | Regular access review | Access should be reviewed periodically. |
 | Auditability | Access changes should be visible through logs. |
+
+## 6. IAM Roles Reviewed
+The following role types are relevant to this review:
+
+| Role Type | Risk Consideration |
+| --- | --- |
+| Owner | Full administrative control. Should be highly restricted. |
+| Editor | Broad access to modify many resources. Often excessive for normal users. |
+| Viewer | Read-only access. Lower risk but still exposes configuration information. |
+| IAM Admin | Can modify access and should be highly restricted. |
+| Security Reviewer | Suitable for security review activity. Lower risk than Owner or Editor. |
+| Logging Viewer | Allows log review. Useful for investigation but logs may contain sensitive information. |
+| Storage Admin | Can manage storage buckets and data access. Should be limited. |
+| Cloud Run Admin / Developer | Should be limited to application deployment responsibilities. |
+| Service Account User | Can act as a service account. Should be carefully controlled. |
+| Secret Manager | Can access secrets. |
+| Secret Accessor | Should be restricted. |
+| Biling Viewer | Allows billing visibility without resource administration. |
+
+## 7. IAM Access Model
+The fictional access model for ShopSmart is shown below.
+
+| Role / User Type |	Business Responsibility |	Expected Access |
+| --- | --- | --- |
+| Cloud Administrator |	Manages GCP project and technical configuration. |	Limited number of privileged roles. |
+| Security Reviewer |	Reviews IAM, logging, storage, and security posture. |	Security Reviewer and Logging Viewer. |
+| Internal Developer |	Supports optional Cloud Run demo app. |	Limited Cloud Run and deployment access. |
+| External Developer Contractor |	Supports temporary application updates. |	Time-limited least-privilege access only. |
+| Finance Manager |	Reviews billing and budget alerts. |	Billing Viewer only. |
+| Operations Manager |	Owns business risk and receives security reports. |	No direct admin access required unless justified. |
+| Service Accounts |	Used by workloads or automation. |	Workload-specific access only. |
+
+For the actual lab, these roles may be represented in documentation without creating real external user accounts.
