@@ -100,3 +100,113 @@ The fictional access model for ShopSmart is shown below.
 | Service Accounts |	Used by workloads or automation. |	Workload-specific access only. |
 
 For the actual lab, these roles may be represented in documentation without creating real external user accounts.
+
+## 8. IAM Review Findings Summary
+
+| Finding ID | Finding | Severity | Status |
+| --- | --- | --- | --- |
+| IAM-01 | Project Owner access should be limited to the minimum number of trusted administrators. | High | Review Required |
+| IAM-02 | Broad Editor roles should be avoided where specific roles are available. | High | Review Required |
+| IAM-03 | Service accounts should not have Owner or Editor roles. | High | Review Required |
+| IAM-04 | External contractor access should be time-limited and reviewed. | Medium | Review Required |
+| IAM-05 | Billing access should be separated from technical administration. | Medium | Review Required |
+| IAM-06 | Security reviewers should use read-only security and logging roles where possible. | Medium | Review Required |
+| IAM-07 | Service account keys should be avoided unless required. | High | Review Required |
+| IAM-08 | IAM access should be reviewed at least every six months. | Medium | Recommended |
+| IAM-09 | Privileged access changes should be monitored in Cloud Logging. | Medium | Recommended |
+| IAM-10 | Sensitive roles such as Secret Manager access should be limited. | High | Review Required |
+
+## 9. Detailed IAM Review
+
+### 9.1 Project Owner Access
+Project Owner access gives broad administrative control over the GCP project. Review questions:
+- Who has Project Owner access?
+- Is Project Owner access required for daily work?
+- Can the user perform their role with a more limited role?
+- Is there more than one trusted administrator?
+- Are personal accounts used for administration?
+- Is privileged access reviewed periodically?
+
+`Risk`:
+If Project Owner access is granted too broadly, a compromised account could modify resources, change IAM permissions, disable logging, delete resources, access sensitive configuration, or create unexpected cost.
+
+`Recommendation`:
+Project Owner access should be limited to a small number of trusted administrator accounts. Day-to-day work should use more specific roles wherever possible.
+
+### 9.2 Editor Role Review
+The Editor role provides broad permissions across many GCP services. Review questions:
+- Are any users assigned the Editor role?
+- Are any service accounts assigned the Editor role?
+- Is Editor access required?
+- Can the access be replaced with narrower predefined roles?
+- Can role assignments be limited to specific resources?
+
+`Risk`:
+The Editor role may allow users or service accounts to modify resources beyond their job responsibilities. This increases the risk of accidental changes, unauthorised activity, and privilege misuse.
+
+`Recommendation`:
+Avoid assigning Editor roles for normal users or service accounts. Replace Editor access with specific roles such as Cloud Run Developer, Storage Object Admin, Logging Viewer, Security Reviewer, or Secret Manager Secret Accessor only where needed.
+
+### 9.3 Viewer and Read-Only Access
+Viewer access allows users to view project resources and configuration. Review questions:
+- Who has Viewer access?
+- Is Viewer access appropriate for the user’s role?
+- Does the user also need Logging Viewer or Security Reviewer?
+- Is access granted to personal accounts or business-controlled accounts?
+
+`Risk`:
+Viewer access is lower risk than Owner or Editor, but it may still expose infrastructure details, project configuration, resource names, and security settings.
+
+`Recommendation`:
+Use read-only access for users who only need visibility. Review whether Viewer access should be combined with more targeted roles depending on job function.
+
+### 9.4 Security Reviewer Access
+Security Reviewer access is useful for reviewing security configuration without granting broad administrative permissions. Review questions:
+- Is the security reviewer using a read-only security role?
+- Does the reviewer also need Logging Viewer?
+- Does the reviewer have unnecessary Owner or Editor access?
+- Can security review be performed without administrative access?
+
+`Risk`:
+If a security reviewer has excessive access, the review account itself becomes a privileged risk.
+
+`Recommendation`:
+Security review activities should use read-only roles where possible, such as Security Reviewer, Viewer, and Logging Viewer. Administrative access should only be used when configuration changes are required.
+
+### 9.5 Logging Viewer Access
+Logging Viewer access allows users to review logs for investigation and monitoring. Review questions:
+- Who can view logs?
+- Are logs accessible to only authorised users?
+- Do logs contain sensitive activity details?
+- Can IAM changes and storage changes be found in Log Explorer?
+
+`Risk`:
+Logs may contain sensitive operational information, user activity, IP addresses, system events, and security-relevant details.
+
+`Recommendation`:
+Logging access should be granted to users with a valid security, operational, or audit purpose. Log access should not be given to users who do not need it.
+
+### 9.6 External Contractor Access
+External developers or contractors may support application deployment or cloud configuration. Review questions:
+- Does any external user have access to the project?
+- What roles are assigned to the external user?
+- Is access time-limited?
+- Is access reviewed after the work is completed?
+- Is contractor access documented?
+- Is privileged access avoided?
+
+`Risk`:
+External contractor access can create risk if permissions are excessive, not monitored, or not removed after engagement ends.
+
+`Recommendation`:
+Contractor access should be limited to specific work activities, approved by the business owner, reviewed regularly, and removed immediately when no longer required.
+
+`Suggested contractor access model`:
+
+| Contractor Task | Suggested Role |
+| --- | --- |
+| Review Cloud Run deployment | Cloud Run Viewer |
+| Deploy demo Cloud Run service | Cloud Run Developer |
+| View logs for troubleshooting | Logs Viewer |
+| Access storage object for deployment | Storage Object Viewer or Storage Object Admin, only if required |
+| Manage IAM | Not recommended unless specifically approved |
