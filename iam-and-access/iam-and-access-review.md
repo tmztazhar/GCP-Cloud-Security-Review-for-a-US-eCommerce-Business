@@ -255,3 +255,120 @@ Review questions:
 - Is the service account used by a specific resource?
 
 `Recommendation`: Each service account should have a clear purpose, named owner, workload association, and least-privilege role assignment.
+
+## 11. Privileged Access Review
+Privileged access includes roles that can create, modify, delete, or control important GCP resources. Examples of privileged roles:
+
+| Role | Reason High Risk |
+| --- | --- |
+| Owner | Full control over the project. |
+| Editor | Broad modification access. |
+| IAM Admin | Can modify user permissions. |
+| Service Account Admin | Can create and manage service accounts. |
+| Service Account User | Can act as a service account. |
+| Storage Admin | Can control storage buckets and access. |
+| Secret Manager Admin | Can manage secrets. |
+| Biling Admin | Can change billing-related settings. |
+
+Recommended controls:
+- Limit privileged roles.
+- Use specific predefined roles instead of broad roles.
+- Review privileged access every three to six months.
+- Remove unused privileged access.
+- Monitor privileged IAM changes.
+- Use MFA for privileged accounts.
+- Avoid service account keys.
+- Document risk acceptance if broad roles remain.
+
+## 12. MFA and Account Security Observations
+MFA is not fully managed inside the GCP project IAM page. However, account security remains important for users with project access. Review questions:
+- Are privileged users using MFA on their Google accounts?
+- Are personal accounts used for administration?
+- Are business-controlled accounts preferred?
+- Are admin accounts protected from phishing?
+- Is account recovery secure?
+
+`Risk`: If a privileged Google account is compromised, an attacker may gain access to the GCP project and cloud resources.
+
+`Recommendation`: All privileged users should enable MFA. Business environments should use managed identities where possible. Privileged access should not rely only on passwords.
+
+## 13. Access Review Process
+ShopSmart should perform formal access reviews. Recommended access review frequency:
+
+| Access Type | Review Frequency |
+| --- | --- |
+| Project Owner access | Every 3 months |
+| Editor and IAM Admin access | Every 3 months |
+| Service account roles | Every 6 months |
+| External contractor access | Monthly or after work completion |
+| Secret Manager access | Every 3 months |
+| Storage Admin access | Every 6 months |
+| Biling Access | Every 6 months |
+| General viewer access | Every 6 to 12 months |
+
+Access review should confirm:
+- User still needs access.
+- Role is appropriate.
+- Access owner is known.
+- External access is still required.
+- Unused service accounts are removed.
+- Broad roles are reduced where possible.
+- Findings are recorded and tracked.
+
+## 14. Joiner, Mover, Leaver Considerations
+Although this is a lab project, the fictional business should have a simple access lifecycle process.
+
+|Scenario | Required Action |
+| --- | --- |
+| New employee joins | Access approved based on job role. |
+| Employee changes role | Access updated to match new responsibility. |
+| Employee leaves | Access removed promptly. |
+| Contractor starts work | Temporary access approved and documented. |
+| Contractor finishes work | Access removed immediately. |
+| Service account no longer used | Disable or delete after review. |
+
+`Risk`: Without a joiner, mover, leaver process, former employees or contractors may retain access to cloud systems.
+
+`Recommendation`: Document access approvals and removals. Review IAM membership regularly.
+
+## 15. IAM Findings and Recommendations
+| Finding ID |	Finding |	Risk |	Recommendation |	Priority |
+| --- | --- | --- | --- | --- |
+| IAM-01 |	Broad privileged access may exist through Owner or Editor roles. |	A compromised account could control project resources. |	Limit Owner and Editor roles. | Use specific predefined roles. |	High |
+| IAM-02 |	Service accounts may be assigned roles broader than required. |	Workload compromise could lead to wider cloud access. |	Assign service accounts only the roles required for their workload. |	High |
+| IAM-03 |	Service account keys may create credential exposure risk. |	Downloaded keys could be leaked or reused outside GCP. |	Avoid keys where possible and delete unnecessary keys. |	High |
+| IAM-04 |	External contractor access may not be time-limited. |	Former contractors may retain cloud access. |	Set review dates and remove access after work completion. |	Medium |
+| IAM-05 |	IAM access may not be reviewed regularly. |	Excessive or outdated permissions may remain. |	Perform formal access reviews every three to six months. |	Medium |
+| IAM-06 |	Log access may not be restricted to authorised users. |	Sensitive operational logs may be exposed. |	Grant log access only to users with a valid operational or security need. |	Medium |
+| IAM-07 |	Secret Manager access may be too broad. |	Secrets could be viewed or misused. |	Limit Secret Manager access to approved users and service accounts. |	High |
+| IAM-08 |	MFA status may not be formally verified for privileged users. |	Account compromise risk remains high. |	Require MFA for all privileged Google accounts. |	High |
+
+## 16. Recommended IAM Target State
+The recommended IAM target state for ShopSmart is:
+
+| Area |	Target State |
+| --- | --- |
+| Project Owner |	Limited to one or two trusted administrator accounts. |
+| Editor role |	Avoided unless there is a documented temporary need. |
+| Security review access |	Read-only Security Reviewer and Logging Viewer roles. |
+| Developer access |	Limited to deployment-specific roles. |
+| Contractor access |	Time-limited, approved, and removed after work completion. |
+| Finance access |	Billing Viewer only unless additional access is justified. |
+| Service accounts |	Workload-specific and least privilege. |
+| Service account keys |	Avoided or tightly controlled. |
+| Secret access |	Limited to authorised users and workloads. |
+| Access reviews |	Completed every three to six months. |
+| MFA |	Required for privileged users. |
+| Logging |	IAM changes visible in Cloud Logging. |
+
+## 17. Management Summary
+IAM is one of the most important security areas in the ShopSmart GCP environment. Overprivileged users, excessive service account permissions, unused contractor access, and unmanaged service account keys can significantly increase business risk.
+
+The most important improvements are to limit Owner and Editor access, enforce MFA for privileged users, avoid service account keys, review contractor access, and perform regular access reviews.
+
+These improvements are practical, low-cost, and suitable for a small eCommerce business using Google Cloud.
+
+## 18. Portfolio Note
+This IAM and Access Review is part of a fictional GCP cloud security portfolio project. It demonstrates practical cloud identity review, least privilege assessment, service account review, privileged access governance, and business-focused security recommendations.
+
+This document does not represent a production IAM audit, legal assessment, compliance certification, or penetration test.
