@@ -210,3 +210,48 @@ Contractor access should be limited to specific work activities, approved by the
 | View logs for troubleshooting | Logs Viewer |
 | Access storage object for deployment | Storage Object Viewer or Storage Object Admin, only if required |
 | Manage IAM | Not recommended unless specifically approved |
+
+## 10. Service Account Review
+Service accounts are used by applications and workloads to access GCP resources.
+
+### 10.1 Service Accounts Identified
+
+| Service Account | Intended Use | Expected Access |
+| --- | --- | --- |
+| shopsmart-cloudrun-sa | Optional Cloud Run demo app runtime identity. | Minimum access required by the app. |
+| shopsmart-storage-review-sa | Storage access review scenario. | Limited storage-specific access. |
+| shopsmart-logging-review-sa | Logging access review scenario. | Logging viewer or limited log-related access. |
+
+### 10.2 Service Account Risk Areas
+
+| Risk Area | Description |
+| --- | --- |
+| Overprivileged service account | Service account has broader access than required. |
+| Unused service account | Old or unused service account remains active. |
+| Service account key exposure | Downloaded key file could be leaked or reused. |
+| Owner or Editor role assigned | Service account can perform broad administrative actions. |
+| Unclear ownership | No one knows which workload uses the service account. |
+| No review cycle | Permissions are not reviewed periodically. |
+
+### 10.3 Service Account Key Review
+Review questions:
+- Do any service accounts have user-managed keys?
+- Are keys required?
+- When were keys created?
+- Are old keys still active?
+- Are keys stored securely?
+- Can keys be replaced with workload identity or managed access?
+
+`Risk`: Service account keys are high-risk because they can be copied, leaked, committed to code repositories, or used outside the GCP environment.
+
+`Recommendation`: Avoid service account keys unless clearly required. If keys exist, they should be documented, rotated, protected, and deleted when no longer needed.
+
+### 10.4 Service Account Role Review
+Review questions:
+- What roles are assigned to each service account?
+- Does each role match the service account’s purpose?
+- Does any service account have Owner or Editor?
+- Can broad roles be replaced with narrower roles?
+- Is the service account used by a specific resource?
+
+`Recommendation`: Each service account should have a clear purpose, named owner, workload association, and least-privilege role assignment.
