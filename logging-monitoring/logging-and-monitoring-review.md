@@ -117,3 +117,169 @@ This review answers the following questions:
 | Log access permissions | Limited to authorised users. | Review Required |
 | Alerting | Basic alerts considered for high-risk activities. | Recommended |
 | Evidence screenshots | Captured and sanitised before publishing. | Required |
+
+## 9. Admin Activity Audit Logs Review
+Admin Activity logs are important because they show administrative changes in the GCP environment.
+
+Review questions:
+- Can project-level administrative changes be found?
+- Can IAM role changes be reviewed?
+- Can service account creation or deletion be reviewed?
+- Can Cloud Storage bucket configuration changes be reviewed?
+- Can Secret Manager configuration changes be reviewed?
+- Can Cloud Run deployment or configuration changes be reviewed?
+- Are logs understandable for investigation?
+
+Examples of activities to generate useful Admin Activity logs:
+- `Create a Cloud Storage bucket`
+- `Update bucket permissions`
+- `Create a service account`
+- `Assign a role to a service account`
+- `Create a Secret Manager secret`
+- `Deploy optional Cloud Run service`
+- `Modify IAM role assignment`
+
+`Risk`: Without administrative activity visibility, the business may not know who changed permissions, created resources, modified access, or changed security settings.
+
+`Recommendation`: Admin Activity logs should be reviewed during security investigations and periodically checked for high-risk changes such as IAM updates, service account key creation, and storage permission changes.
+
+## 10. IAM Logging Review
+IAM logs help identify changes to users, roles, permissions, and project access. Review questions:
+- Can IAM role changes be found in Log Explorer?
+- Can new principals added to the project be identified?
+- Can role removals be reviewed?
+- Can privileged access changes be investigated?
+- Can changes to Owner, Editor, IAM Admin, or Service Account roles be detected?
+
+`Risk`: Unauthorised or accidental IAM changes can increase the risk of privilege misuse, account compromise, unauthorised access, and data exposure.
+
+`Recommendation`: IAM changes should be treated as high-value security events. Privileged role changes should be reviewed and, where possible, monitored through alerts.
+
+Suggested high-risk IAM events:
+
+| Event | Reason |
+| --- | --- |
+| New Project Owner added | Full administrative access granted. |
+| Editor role assigned | Broad modification access granted. |
+| IAM Admin assigned | User can modify access. |
+| Service Account User assigned | User may act as a service account. |
+| Secret Manager access granted | User may access sensitive secrets. |
+| External user added | Third-party access risk. |
+
+## 11. Service Account Logging Review
+Service account activity should be visible because service accounts can be high-risk cloud identities. Review questions:
+- Can service account creation be found in logs?
+- Can service account deletion be found in logs?
+- Can role changes for service accounts be reviewed?
+- Can service account key creation be identified?
+- Can service account key deletion be identified?
+- Can service account usage be linked to a workload?
+
+`Risk`: If service account activity is not reviewed, the business may miss key creation, excessive role assignment, or workload identities being misused.
+
+`Recommendation`: Service account key creation should be treated as a high-risk event. Service accounts should be reviewed regularly, and unnecessary keys should be avoided or deleted.
+
+## 12. Cloud Storage Logging Review
+Cloud Storage logging supports investigation of bucket configuration and access-related changes. Review questions:
+- Can bucket creation be reviewed?
+- Can bucket deletion be reviewed?
+- Can bucket IAM permission changes be found?
+- Can public access changes be identified?
+- Can object upload or deletion activity be reviewed where logging is available?
+- Are sensitive buckets separated from public or product image buckets?
+
+`Risk`: Cloud Storage misconfiguration can expose sensitive customer, order, or business data. Poor logging may delay detection and investigation.
+
+`Recommendation`: Bucket permission changes should be reviewed, especially for buckets representing confidential or restricted business information. Public access changes should be treated as high-priority events.
+
+Suggested high-risk storage events:
+| Event | Reason |
+| --- | --- |
+| Public access granted | Possible data exposure. |
+| Bucket IAM changed | Access boundary modified. |
+| Public access prevention disabled | Increased exposure risk. |
+| Sensitive bucket created without controls | Governance gap. |
+| Unusual object deletion | Possible data loss or misuse. |
+
+## 13. Secret Manager Logging Review
+Secret Manager activity should be reviewed because secrets may contain API keys, credentials, tokens, or sensitive application configuration. Review questions:
+- Can secret creation be reviewed?
+- Can secret version changes be reviewed?
+- Can secret access events be reviewed where logging is available?
+- Who can access secrets?
+- Are secret values excluded from screenshots?
+- Are secrets stored in Secret Manager instead of code or files?
+
+`Risk`: If secrets are accessed or changed without visibility, the business may not detect credential misuse, exposed tokens, or unauthorised access.
+
+`Recommendation`: Secret Manager access should be limited and monitored. Secret values should never appear in screenshots, GitHub repositories, documentation, or logs.
+
+## 14. Cloud Run Logging Review
+Cloud Run is optional in this project. If used, logs should be reviewed for basic operational and security visibility. Review questions:
+- Are request logs visible?
+- Are deployment events visible?
+- Are configuration changes visible?
+- Is the service publicly accessible?
+- Is unauthenticated access enabled intentionally?
+- Which service account does the Cloud Run service use?
+- Are errors visible in logs?
+- Are logs useful for basic troubleshooting?
+
+`Risk`: Without application and service logs, the business may not detect application errors, unexpected access patterns, configuration changes, or service availability issues.
+
+`Recommendation`: If Cloud Run is used, logs should be captured as part of the evidence set. Public access should be intentional and documented.
+
+## 15. VPC Firewall Logging Review
+Firewall logging is optional depending on whether network resources are used. Review questions:
+- Are any firewall rules allowing access from `0.0.0.0/0`?
+- Are SSH, RDP, HTTP, or HTTPS rules exposed?
+- Is firewall logging enabled for high-risk rules?
+- Are unused firewall rules present?
+- Is the project using Compute Engine resources?
+- Is network exposure relevant to this lab?
+
+`Risk`: Broad firewall rules can expose resources to the internet. Without firewall logging, suspicious access attempts may not be visible.
+
+`Recommendation`: Avoid creating unnecessary public firewall rules. If public rules are required, document the business reason and consider enabling firewall logging for high-risk rules.
+
+## 16. Security Command Center Review
+Security Command Center Standard provides security posture visibility for the GCP environment. Review questions:
+- Is Security Command Center available for the project?
+- Are any findings shown?
+- Are findings related to IAM, storage, service accounts, network, or public exposure?
+- Are findings prioritised?
+- Are findings linked to recommendations?
+- Are findings included in the risk register where relevant?
+
+`Risk`: If security findings are not reviewed, the business may miss cloud misconfigurations or high-priority risks.
+
+`Recommendation`: Security Command Center findings should be reviewed during the security assessment and documented in the security checklist and risk register.
+
+## 17. Log Access Review
+Logs may contain sensitive information, including user activity, IP addresses, resource names, access changes, service activity, and incident evidence. Review questions:
+- Who can view logs?
+- Are log viewers limited to authorised users?
+- Do developers need full log access?
+- Does the security reviewer have appropriate log visibility?
+- Are logs exposed to users who do not need them?
+- Are logs treated as sensitive information?
+
+`Risk`: Excessive log access may expose sensitive operational information and security evidence.
+
+`Recommendation`: Grant log access only to users with a clear operational, security, or audit need. Use roles such as Logging Viewer or Logs Viewer where appropriate.
+
+## 18. Monitoring and Alerting Review
+Monitoring and alerting help identify issues before they become major incidents. For this SME lab scenario, alerting should remain simple and practical. Recommended alerting areas:
+
+| Alert Area | Why It Matters |
+| --- | --- |
+| Billing budget alert | Detects unexpected cost increases. |
+| Cloud Run service errors | Helps identify application issues if Cloud Run is used. |
+| High-risk IAM changes | Helps detect privileged access changes. |
+| Service account key creation | Helps detect risky credential creation. |
+| Cloud Storage public access change | Helps detect accidental exposure. |
+| Secret access or change | Helps monitor sensitive configuration. |
+
+`Risk`: Without useful alerts, important security or operational events may go unnoticed until customers or staff report a problem.
+
+`Recommendation`: At minimum, billing budget alerts should be configured. Security alerts for high-risk IAM and storage events should be considered as the environment matures.
