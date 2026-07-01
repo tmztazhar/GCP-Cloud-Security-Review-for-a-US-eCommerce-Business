@@ -283,3 +283,50 @@ Monitoring and alerting help identify issues before they become major incidents.
 `Risk`: Without useful alerts, important security or operational events may go unnoticed until customers or staff report a problem.
 
 `Recommendation`: At minimum, billing budget alerts should be configured. Security alerts for high-risk IAM and storage events should be considered as the environment matures.
+
+## 19. Logging and Monitoring Findings
+
+| Finding ID |	Finding |	Risk |	Recommendation |	Priority |
+| --- | --- | --- | --- | --- |
+| LOG-01 |	Admin Activity logs should be reviewed for high-risk changes. |	Important configuration changes may be missed. |	Review IAM, service account, storage, and secret changes through Log Explorer. |	High |
+| LOG-02 |	IAM role changes should be monitored. |	Privileged access may be granted without timely review. |	Track high-risk IAM changes and include them in access reviews. |	High |
+| LOG-03 |	Service account key creation should be visible and reviewed. |	Keys may be leaked or misused. |	Avoid keys and monitor any key creation events. |	High |
+| LOG-04 |	Cloud Storage permission changes should be reviewed. |	Sensitive data may become publicly exposed. |	Review bucket permission changes and public access settings. |	High |
+| LOG-05 |	Log access should be restricted. |	Sensitive operational details may be visible to unnecessary users. |	Grant Logging Viewer only to authorised users. |	Medium |
+| LOG-06 |	Basic alerting may be limited. |	Security events may not trigger timely action. |	Configure alerts for budget, high-risk IAM changes, and public storage changes where practical. |	Medium |
+| LOG-07 |	Security Command Center findings should be reviewed. |	Cloud misconfigurations may remain untracked. |	Review findings and add relevant issues to the risk register. |	Medium |
+| LOG-08 |	Evidence screenshots must be sanitised before publication. |	Personal or sensitive information may be exposed in the portfolio. |	Blur emails, project IDs, billing details, IP addresses, and sensitive identifiers. |	High |
+
+## 20. Recommended Target State
+
+The recommended logging and monitoring target state for ShopSmart is:
+
+| Area | Target State |
+| --- | --- |
+| Admin Activity logs | Available and reviewed for high-risk changes. |
+| IAM changes | Visible in Log Explorer and reviewed periodically. |
+| Service account activity | Service account creation and key events are reviewed. |
+| Storage activity | Bucket permission changes are reviewed. |
+| Secret Manager activity | Secret access and changes are limited and reviewed. |
+| Cloud Run logs | Available if Cloud Run is used. |
+| Security Command Center | Findings reviewed and tracked. |
+| Log access | Limited to authorised operational or security users. |
+| Alerting | Budget alerts configured; high-risk security alerts considered. |
+| Evidence handling | Screenshots sanitised before public release. |
+| Incident support | Logs can support incident triage and investigation. |
+
+## 21. Management Summary
+
+Logging and monitoring are essential for understanding what happened in the GCP environment before, during, and after a security incident.
+
+For ShopSmart, the most important logging priorities are visibility over IAM changes, service account activity, Cloud Storage permission changes, Secret Manager activity, and Security Command Center findings.
+
+The business should also restrict who can view logs, configure billing alerts, consider simple security alerts for high-risk changes, and ensure screenshots used for the portfolio are sanitised before publication.
+
+These controls are practical, low-cost, and suitable for a small eCommerce business using GCP.
+
+## 22. Portfolio Note
+
+This Logging and Monitoring Review is part of a fictional GCP cloud security portfolio project. It demonstrates practical review of cloud visibility, audit logs, monitoring, alerting considerations, incident evidence, and business-focused cloud security recommendations.
+
+This document does not represent a production monitoring design, legal assessment, compliance certification, forensic investigation, or penetration test.
