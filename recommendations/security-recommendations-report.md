@@ -269,3 +269,198 @@ ShopSmart should restrict Secret Manager access to authorised users and workload
 | Secret screenshots |	Secret values hidden. |
 | Review frequency |	Every three months. |
 | Rotation |	Considered for sensitive secrets. |
+
+### 4.6 Review Cloud Storage Bucket Permissions
+**Recommendation ID**: REC-06
+
+**Priority**: High
+
+**Related Risks**:
+- Public data exposure.
+- Sensitive order data leakage.
+- Misconfigured bucket permissions.
+- Unauthorised object access.
+
+**Issue**
+
+Cloud Storage buckets may store product files, order files, logs, exports, or application data. Misconfigured bucket permissions can expose sensitive data.
+
+**Business Impact**
+
+For an eCommerce business, storage exposure could affect customer trust, privacy expectations, operational records, and business reputation.
+
+**Recommended Action**
+
+ShopSmart should review all Cloud Storage bucket permissions and confirm that access is appropriate. Recommended actions:
+1. List all Cloud Storage buckets.
+2. Confirm the purpose of each bucket.
+3. Classify each bucket as Public, Internal, Confidential, or Restricted.
+4. Review bucket IAM permissions.
+5. Confirm public access is intentional only for public product assets.
+6. Ensure order-related or customer-related buckets are not public.
+7. Enable uniform bucket-level access where appropriate.
+8. Review object-level permissions.
+9. Remove unnecessary users and service accounts.
+10. Record screenshots as evidence.
+
+**Suggested Target State**
+
+| Bucket Type |	Target State |
+| --- | --- |
+| Product image bucket |	Public access only if required and documented. |
+| Order document bucket |	Private with public access blocked. |
+| Sensitive file bucket |	Restricted access only. |
+| Unknown bucket |	Reviewed and classified. |
+| Review frequency |	Every six months. |
+
+### 4.7 Confirm Public Access Prevention
+
+**Recommendation ID**: REC-07
+
+**Priority**: High
+
+**Related Risks**:
+- Accidental public exposure.
+- Customer or order data leakage.
+- Misconfigured access settings.
+
+**Issue**
+
+Sensitive Cloud Storage buckets should not be publicly accessible. Public access prevention helps reduce the risk of accidental public exposure.
+
+**Business Impact**
+
+Accidental public exposure of customer or order-related files may lead to reputational damage, customer complaints, privacy concerns, and operational disruption.
+
+**Recommended Action**
+
+ShopSmart should confirm public access prevention is enabled for buckets containing sensitive or confidential information. Recommended actions:
+1. Identify buckets containing sensitive or confidential data.
+2. Confirm public access prevention is enabled.
+3. Confirm no allUsers or allAuthenticatedUsers access exists.
+4. Review whether any public bucket access is intentional.
+5. Document business justification for public buckets.
+6. Monitor changes to bucket public access settings.
+
+**Suggested Target State**
+
+| Area | Target State |
+| --- | --- |
+| Sensitive buckets |	Public access blocked. |
+| Public buckets |	Business justification documented. |
+| Anonymous access |	Not allowed for sensitive buckets. |
+| Review frequency |	Every six months or after major changes. |
+
+### 4.8 Review IAM and Service Account Activity in Cloud Logging
+**Recommendation ID**: REC-08
+
+**Priority**: High
+
+**Related Risks**:
+- Unnoticed privilege changes.
+- Service account misuse.
+- Weak incident investigation capability.
+- Lack of security visibility.
+
+**Issue**
+
+IAM and service account changes are high-value security events. If these events are not reviewed, unauthorised access changes may go unnoticed.
+
+**Business Impact**
+
+A malicious or accidental IAM change may grant excessive access, expose cloud resources, or weaken the security posture of the environment.
+
+**Recommended Action**
+
+ShopSmart should use Cloud Logging and Log Explorer to review high-risk IAM and service account activity. Recommended actions:
+1. Confirm IAM changes are visible in Log Explorer.
+2. Review role assignments and removals.
+3. Review Project Owner and Editor changes.
+4. Review service account creation.
+5. Review service account key creation.
+6. Review external user additions.
+7. Consider alerts for high-risk access changes.
+8. Include IAM log review in periodic security checks.
+
+**Suggested Target State**
+
+| Event Type |	Target State |
+| --- | --- |
+| Project Owner added |	Reviewed. |
+| Editor assigned |	Reviewed. |
+| Service account key created |	Reviewed and investigated. |
+| External user added |	Reviewed and approved. |
+| Secret access granted |	Reviewed. |
+
+### 4.9 Restrict Log Access
+**Recommendation ID**: REC-09
+
+**Priority**: Medium
+
+**Related Risks**:
+- Sensitive log exposure.
+- Unauthorised access to operational information.
+- Excessive visibility into security activity.
+
+**Issue**
+
+Logs may contain sensitive operational and security information, including user activity, IP addresses, resource names, access changes, and investigation evidence.
+
+**Business Impact**
+
+If too many users can view logs, sensitive system details may be exposed. This can also reduce the integrity of incident investigations.
+
+**Recommended Action**
+
+ShopSmart should restrict log access to users with a valid security, operational, or audit need. Recommended actions:
+1. Identify users with log access.
+2. Confirm whether log access is required.
+3. Remove unnecessary log access.
+4. Use Logging Viewer or Logs Viewer roles appropriately.
+5. Avoid granting log access through broad roles such as Owner or Editor.
+6. Review log access every six months.
+
+**Suggested Target State**
+| Area |	Target State |
+| --- | --- |
+| Log viewers |	Limited to authorised users. |
+| Developers |	Access only where needed for troubleshooting. |
+| Security reviewer |	Read-only logging access. |
+| Review frequency |	Every six months. |
+
+### 4.10 Configure Billing Budget Alerts
+**Recommendation ID**: REC-10
+
+**Priority**: Medium
+
+**Related Risks**:
+- Unexpected cloud costs.
+- Resource misuse.
+- Lack of cost governance.
+- Accidental deployment of paid resources.
+
+**Issue**
+
+Cloud environments can generate unexpected charges if resources are deployed incorrectly, left running, or misused.
+
+**Business Impact**
+
+Unexpected billing can affect a small business financially and may indicate resource misuse or poor cloud governance.
+
+**Recommended Action**
+
+ShopSmart should configure billing budget alerts for the GCP project. Recommended actions:
+1. Create a project-level budget.
+2. Use a low threshold appropriate for the lab or SME environment.
+3. Configure alerts at 50%, 75%, and 90% or 100%.
+4. Send alerts to the appropriate owner.
+5. Review billing dashboard periodically.
+6. Shut down unused resources.
+
+**Suggested Target State**
+| Area |	Target State |
+| --- | --- |
+| Budget configured |	Yes. |
+| Alert thresholds |	50%, 75%, 90% or 100%. |
+| Alert recipient |	Project owner or finance owner. |
+| Review frequency |	Monthly. |
