@@ -666,3 +666,46 @@ ShopSmart should maintain a cloud risk register for material GCP security risks.
 | Treatment actions |	Documented. |
 | Review frequency |	Monthly or quarterly. |
 | Executive visibility |	Included in security summary. |
+
+## 15. 30-Day Action Plan
+
+The following actions should be completed within the first 30 days.
+
+| Action |	Owner |	Priority |
+| --- | --- | --- |
+| Review Project Owner access. |	Cloud Administrator |	High |
+| Remove unnecessary Editor roles. |	Cloud Administrator |	High |
+| Review service account permissions. |	Cloud Administrator |	High |
+| Delete unnecessary service account keys. |	Cloud Administrator |	High |
+| Restrict Secret Manager access. |	Cloud Administrator |	High |
+| Review Cloud Storage public access settings. |	Cloud Administrator |	High |
+| Configure billing budget alerts. |	Finance Manager |	Medium |
+| Capture IAM, storage, logging, and billing screenshots. |	Security Reviewer |	Medium |
+
+## 16. 60-Day Action Plan
+
+The following actions should be completed within 60 days.
+
+| Action |	Owner |	Priority |
+| --- | --- | --- |
+| Review Cloud Logging for IAM and service account changes. |	Security Reviewer |	High |
+| Review Security Command Center findings. |	Security Reviewer |	Medium |
+| Create access review record. |	Operations Manager |	Medium |
+| Review external contractor access. |	Operations Manager |	Medium |
+| Restrict log access to authorised users. |	Cloud Administrator |	Medium |
+| Apply labels to key resources. |	Cloud Administrator |	Low |
+| Update cloud risk register. |	Security Reviewer |	Medium |
+
+## 17. 90-Day Action Plan
+
+The following actions should be completed within 90 days.
+
+| Action |	Owner |	Priority |
+| --- | --- | --- |
+| Complete formal IAM access review. |	Operations Manager |	Medium |
+| Complete service account review. |	Cloud Administrator |	Medium |
+| Confirm storage bucket classification and ownership. |	Security Reviewer |	Medium |
+| Document cloud security baseline. |	Security Reviewer |	Medium |
+| Present cloud risk summary to business leadership. |	Cloud Security Analyst |	Medium |
+| Review whether additional alerts are needed. |	Security Reviewer |	Medium |
+| Finalise GitHub and Medium documentation. |	Cloud Security Analyst |	Low |
