@@ -464,3 +464,205 @@ ShopSmart should configure billing budget alerts for the GCP project. Recommende
 | Alert thresholds |	50%, 75%, 90% or 100%. |
 | Alert recipient |	Project owner or finance owner. |
 | Review frequency |	Monthly. |
+
+### 4.11 Review Security Command Center Findings
+
+**Recommendation ID**: REC-11
+
+**Priority**: Medium
+
+**Related Risks**:
+- Untracked misconfigurations.
+- Poor security visibility.
+- Missed cloud security findings.
+
+**Issue**
+
+Security Command Center can provide visibility into security posture and findings. If findings are not reviewed, issues may remain unresolved.
+
+**Business Impact**
+
+Unreviewed security findings may allow cloud risks to remain active and increase the chance of account compromise, data exposure, or misconfiguration.
+
+**Recommended Action**
+
+ShopSmart should review Security Command Center Standard findings and include relevant findings in the cloud risk register. Recommended actions:
+1. Open Security Command Center.
+2. Review active findings.
+3. Confirm whether findings are relevant.
+4. Prioritise findings based on business impact.
+5. Add material findings to the risk register.
+6. Track remediation actions.
+7. Recheck findings after remediation.
+
+**Suggested Target State**
+| Area |	Target State |
+| --- | --- |
+| Findings reviewed |	Yes. |
+| Relevant findings tracked |	Added to risk register. |
+| High-risk findings |	Assigned owner and target date. |
+| Review frequency |	Monthly or after major changes. |
+
+### 4.12 Implement Formal Access Reviews
+**Recommendation ID**: REC-12
+
+**Priority**: Medium
+
+**Related Risks**:
+- Former employee access.
+- Excessive permissions.
+- Unreviewed contractor access.
+- Privilege creep.
+
+**Issue**
+
+Without regular access reviews, users and service accounts may retain permissions that are no longer required.
+
+**Business Impact**
+
+Unreviewed access increases the risk of unauthorised activity, data exposure, and cloud misconfiguration.
+
+**Recommended Action**
+
+ShopSmart should implement a simple access review process. Recommended actions:
+1. Export or screenshot IAM roles.
+2. Review users with project access.
+3. Review service accounts and roles.
+4. Confirm business need for each role.
+5. Remove unnecessary access.
+6. Document review results.
+7. Repeat every three to six months.
+
+**Suggested Target State**
+| Access Type |	Review Frequency |
+| --- | --- |
+| Project Owner |	Every three months. |
+| Editor and IAM Admin |	Every three months. |
+| Service accounts |	Every six months. |
+| Contractor access |	Monthly or after work completion. |
+| Secret access |	Every three months. |
+| General viewer access |	Every six to twelve months. |
+
+### 4.13 Time-Limit Contractor Access
+**Recommendation ID**: REC-13
+
+**Priority**: Medium
+
+**Related Risks**:
+- Former contractor access.
+- External account compromise.
+- Unauthorised changes.
+- Poor accountability.
+
+**Issue**
+
+External contractors may require temporary access to support application deployment or cloud configuration. If access is not time-limited, it may remain after the work is completed.
+
+**Business Impact**
+
+A former contractor account with active access may expose the business to unauthorised access, accidental changes, or compromised third-party account risk.
+
+**Recommended Action**
+
+ShopSmart should apply strict governance to contractor access. Recommended actions:
+1. Approve contractor access before granting it.
+2. Assign least-privilege roles only.
+3. Set an access expiry date.
+4. Review access monthly.
+5. Remove access immediately when work is completed.
+6. Avoid granting Owner, Editor, or IAM Admin roles to contractors.
+7. Document contractor access in the access review record.
+
+**Suggested Target State**
+| Area |	Target State |
+| --- | --- |
+| Contractor access |	Temporary and approved. |
+| Privileged contractor access |	Avoided unless exceptional. |
+| Access expiry |	Defined before access is granted. |
+| Review frequency |	Monthly or after project completion. |
+
+### 4.14 Label Resources for Ownership and Governance
+**Recommendation ID**: REC-14
+
+**Priority**: Low
+
+**Related Risks**:
+- Poor asset ownership.
+- Unclear environment separation.
+- Weak cost tracking.
+- Difficulty reviewing resources.
+
+**Issue**
+
+Unlabelled cloud resources can make it difficult to identify purpose, owner, environment, and business relevance.
+
+**Business Impact**
+
+Poor labelling may lead to confusion, unnecessary cost, delayed remediation, and unclear accountability.
+
+**Recommended Action**
+
+ShopSmart should apply simple labels to cloud resources where supported. Recommended labels:
+
+| Label Key |	Example Value |
+| --- | --- |
+| environment |	lab |
+| project |	gcp-security-review |
+| business |	ecommerce |
+| owner |	cloud-security-analyst |
+
+Recommended actions:
+1. Identify resources that support labels.
+2. Apply environment and owner labels.
+3. Use labels consistently.
+4. Include labels in future resource creation standards.
+5. Review labels during cloud governance checks.
+
+**Suggested Target State**
+| Area |	Target State |
+| --- | --- |
+| Critical resources |	Labelled. |
+| Environment |	Clearly identified. |
+| Owner |	Documented. |
+| Cost tracking |	Supported through labels. |
+
+### 4.15 Maintain Cloud Risk Register
+
+**Recommendation ID**: REC-15
+
+**Priority**: Medium
+
+**Related Risks**:
+- Untracked cloud risks.
+- No clear treatment ownership.
+- Poor executive visibility.
+- Repeated misconfigurations.
+
+**Issue**
+
+Cloud security findings should not remain only as technical notes. They should be recorded, prioritised, assigned to owners, and tracked to closure.
+
+**Business Impact**
+
+Without a cloud risk register, business leadership may not understand which cloud risks matter most, who owns them, and what actions are being taken.
+
+**Recommended Action**
+
+ShopSmart should maintain a cloud risk register for material GCP security risks. Recommended actions:
+1. Record all high and medium cloud security risks.
+2. Assign a business or technical owner.
+3. Score likelihood and impact.
+4. Record existing controls.
+5. Define treatment actions.
+6. Set target dates.
+7. Track status.
+8. Review the register monthly or quarterly.
+
+**Suggested Target State**
+| Area |	Target State |
+| --- | --- |
+| Cloud risks |	Recorded in risk register. |
+| Risk owners |	Assigned. |
+| Treatment actions |	Documented. |
+| Review frequency |	Monthly or quarterly. |
+| Executive visibility |	Included in security summary. |
