@@ -709,3 +709,67 @@ The following actions should be completed within 90 days.
 | Present cloud risk summary to business leadership. |	Cloud Security Analyst |	Medium |
 | Review whether additional alerts are needed. |	Security Reviewer |	Medium |
 | Finalise GitHub and Medium documentation. |	Cloud Security Analyst |	Low |
+
+## 18. Business Benefit Summary
+
+| Recommendation Area |	Business Benefit |
+| --- | --- |
+| IAM hardening |	Reduces account compromise and unauthorised access risk. |
+| Service account review |	Reduces workload identity and key exposure risk. |
+| Secret Manager control |	Protects API keys, credentials, and sensitive configuration. |
+| Storage permission review |	Reduces accidental customer or order data exposure risk. |
+| Logging review |	Improves investigation and incident response capability. |
+| Billing alerts |	Reduces unexpected cost exposure. |
+| Contractor access governance |	Reduces third-party access risk. |
+| Resource labelling |	Improves ownership and cloud governance. |
+| Risk register |	Improves business visibility and accountability. |
+
+## 19. Recommended Security Metrics
+
+ShopSmart should track simple cloud security metrics.
+
+| Metric |	Target |
+| --- | --- |
+| Project Owner accounts |	Limited and reviewed every three months. |
+| Editor role assignments |	Zero or documented exception only. |
+| Service accounts with Owner or Editor |	Zero. |
+| User-managed service account keys |	Zero unless approved. |
+| Sensitive buckets with public access |	Zero. |
+| Critical secrets with broad access |	Zero. |
+| IAM access reviews completed |	Every three to six months. |
+| Contractor access reviewed |	Monthly or after engagement completion. |
+| High-risk findings open |	Trending downward. |
+| Security Command Center findings reviewed |	Monthly or after major changes. |
+| Billing alert configured |	Yes. |
+| Cloud risk register updated |	Monthly or quarterly. |
+
+## 20. Recommended Target State
+
+The recommended target state for ShopSmart is:
+
+| Security Area |	Target State |
+| --- | --- |
+| IAM |	Least-privilege access with minimal Owner and no unnecessary Editor roles. |
+| Service accounts |	Workload-specific, documented, and not overprivileged. |
+| Service account keys |	Avoided unless required and approved. |
+| Secrets |	Stored in Secret Manager with restricted access. |
+| Storage |	Public access blocked for sensitive buckets. |
+| Logging |	IAM, storage, service account, and secret activity visible. |
+| Monitoring |	Billing alerts configured and high-risk alerts considered. |
+| Contractors |	Temporary access only with review and removal process. |
+| Governance |	Cloud risk register maintained and reviewed. |
+| Evidence |	Screenshots sanitised before portfolio publication. |
+
+## 21. Management Summary
+
+ShopSmart can significantly improve its GCP security posture by focusing on practical access control, storage protection, service account hardening, secrets management, logging visibility, and basic cloud governance.
+
+The most important actions are to reduce broad IAM roles, review service accounts, prevent public access to sensitive storage, restrict access to secrets, and ensure important cloud activities are visible in logs.
+
+These recommendations are realistic for a small eCommerce business and can be implemented without expensive enterprise security tools.
+
+## 27. Portfolio Note
+
+This Security Recommendations Report is part of a fictional GCP cloud security portfolio project. It demonstrates practical cloud security analysis, risk-based prioritisation, remediation planning, and business-focused communication for a US eCommerce business scenario.
+
+This document does not represent legal advice, compliance certification, penetration testing, or a full production cloud security assessment.
