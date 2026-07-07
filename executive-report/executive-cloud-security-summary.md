@@ -206,3 +206,51 @@ The recommended improvements provide the following business benefits.
 | Lower cost exposure |	Billing alerts help detect unexpected spending. |
 | Stronger operational resilience |	Clear ownership and review cycles reduce misconfiguration risk. |
 | Practical security maturity |	Improvements are realistic for an SME without expensive tooling. |
+
+## 11. Key Decisions Required
+
+Business leadership should make the following decisions:
+
+| Decision |	Recommended Direction |
+| --- | --- |
+| Privileged access |	Limit Owner and Editor roles. |
+| Service account keys |	Avoid keys unless clearly required and approved. |
+| Cloud Storage exposure |	Block public access for sensitive buckets. |
+| Secret access |	Restrict Secret Manager access to approved users and workloads. |
+| Contractor access |	Require expiry dates and periodic review. |
+| Logging review |	Review high-risk IAM, storage, and service account activity. |
+| Billing alerts |	Keep budget alerts active for the project. |
+| Risk register |	Maintain the cloud risk register and review it regularly. |
+| Security reporting |	Provide a cloud security update to leadership quarterly. |
+
+## 12. Residual Risk Statement
+
+After implementing the recommended actions, the residual risk for the ShopSmart GCP lab environment is expected to reduce from moderate/high to low/moderate.
+
+Some residual risk will remain because:
+- Cloud environments change over time.
+- Users and service accounts may require access for legitimate work.
+- Public endpoints may be required for customer-facing services.
+- Logging requires review and follow-up to be effective.
+- Contractors may still require temporary access.
+- Human error can still cause misconfiguration.
+
+Residual risk should be managed through regular access reviews, cloud risk register updates, logging review, service account review, and leadership reporting.
+
+## 13. Executive Conclusion
+
+ShopSmart’s most important cloud security risks are related to excessive IAM permissions, service account exposure, Cloud Storage misconfiguration, secret access, limited logging review, and contractor access governance.
+
+The recommended improvements are practical, low-cost, and suitable for a small eCommerce business using GCP. The business does not need a complex enterprise security platform to make meaningful improvements.
+
+The highest-value actions are to limit privileged access, remove unnecessary broad roles, review service accounts, avoid service account keys, protect sensitive storage buckets, restrict secrets access, and review important security activity in Cloud Logging.
+
+This project demonstrates how cloud security risks can be reviewed, documented, prioritised, and communicated in a business-focused way.
+
+## 14. Portfolio Note
+
+This Executive Cloud Security Summary is part of a fictional GCP cloud security portfolio project. It demonstrates cloud security review, IAM risk assessment, service account review, storage security analysis, logging and monitoring review, risk-based recommendations, and executive reporting for a US eCommerce business scenario.
+
+ShopSmart Online LLC is not a real company. The GCP environment is a demo lab environment used for learning and portfolio purposes only.
+
+This document does not represent legal advice, compliance certification, penetration testing, or a full production cloud security assessment.
